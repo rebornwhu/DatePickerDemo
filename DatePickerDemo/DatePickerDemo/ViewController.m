@@ -10,9 +10,27 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
 @end
 
+
 @implementation ViewController
+
+- (IBAction)displayDate:(id)sender {
+    NSDate *chosen = [self.datePicker date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"EEEE"];
+    NSString *weekday = [formatter stringFromDate:chosen];
+    NSString *msg = [[NSString alloc] initWithFormat:@"That's a %@", weekday];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What day is that?"
+                                                    message:msg
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Okay"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
